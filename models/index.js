@@ -4,11 +4,25 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+require('dotenv').config(); // Загрузка переменных окружения из .env
 
-const sequelize = new Sequelize('react-drone', 'postgres', 'y0601ar', {
-    host: 'localhost',
-    dialect: 'postgres',
-});
+// Используем переменные окружения для подключения к базе данных
+const sequelize = new Sequelize(
+    process.env.DB_NAME,        // Имя базы данных
+    process.env.DB_USER,        // Имя пользователя
+    process.env.DB_PASSWORD,    // Пароль
+    {
+        host: process.env.DB_HOST, // Хост базы данных
+        port: process.env.DB_PORT, // Порт базы данных
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: {
+                require: true, // Требуется SSL для облачных баз данных
+                rejectUnauthorized: false, // Если у вас самоподписанный сертификат
+            },
+        },
+    }
+);
 
 const db = {};
 

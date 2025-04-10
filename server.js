@@ -21,6 +21,17 @@
 // backend/server.js
 // backend/server.js
 require('dotenv').config(); // Добавьте в начале файла
+console.log('Переменные окружения:', {
+    PORT: process.env.PORT,
+    DB_HOST: process.env.DB_HOST,
+    DB_PORT: process.env.DB_PORT,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_NAME: process.env.DB_NAME,
+    CORS_ORIGIN: process.env.CORS_ORIGIN,
+    ASSETS_PATH: process.env.ASSETS_PATH,
+});
+
 const express = require('express');
 const cors = require('cors');
 const { Sequelize } = require('sequelize');
@@ -56,6 +67,7 @@ sequelize.authenticate()
         console.error('Не удалось подключиться к базе данных:', err);
     });
 
+
 // Создание Express-приложения
 const app = express();
 
@@ -90,7 +102,17 @@ app.get('/', (req, res) => {
     res.send('Сервер работает!');
 });
 
-
+app.get('/api/env', (req, res) => {
+    res.json({
+        PORT: process.env.PORT,
+        DB_HOST: process.env.DB_HOST,
+        DB_PORT: process.env.DB_PORT,
+        DB_USER: process.env.DB_USER,
+        DB_NAME: process.env.DB_NAME,
+        CORS_ORIGIN: process.env.CORS_ORIGIN,
+        ASSETS_PATH: process.env.ASSETS_PATH,
+    });
+});
 
 // Запуск сервера
 const PORT = process.env.PORT || 5000;
