@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "y0601ar",
+    "database": "react-drone",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

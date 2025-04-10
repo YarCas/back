@@ -1,0 +1,9 @@
+# Исключаем node_modules
+node_modules/
+
+# Исключаем .env
+.env
+
+# Исключаем временные файлы
+*.log
+*.tmp
